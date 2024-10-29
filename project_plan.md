@@ -1,6 +1,6 @@
 Below is the plan for my project.
 
-RQ: Does L1 Spanish help L2 French learners acquire the French paraphrastic future faster?
+RQ: Does L1 Spanish help L2 French learners acquire the French periphrastic future faster?
 
 I have chosen to analyze how L1 Spanish affects L2 French learners' acquisition of the paraphrastic future in French. The paraphrastic future includes a subject + auxiliary verb + verb (infinitive), which is the same in both languages. I intend to use a corpus of written data taken from students who are learning the periphrastic future in their university beginner French course. In order to answer my research question, I will need a corpus with L1 English *and* L1 Spanish speakers in order to make a proper comparison. Ideally, I would like to analyze university-level students, but I am willing to choose a different age group if there is not enough for the university-level age range. The study will have about 30 students with an L1 of Spanish. If unable to get enough learners, I will make sure there are sufficient tokens to analyze.  
 
