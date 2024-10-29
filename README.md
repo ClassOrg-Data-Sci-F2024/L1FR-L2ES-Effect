@@ -1,4 +1,4 @@
-# L1ES-L2FR-Effect
+# L1FR-L2ES-Effect
 
 Name: Christina Vega-Alemany
 Project title: Franglés: The L1 French Effect on L2 Spanish Periphrastic Future
