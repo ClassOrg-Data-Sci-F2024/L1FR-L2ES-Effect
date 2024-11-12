@@ -1,7 +1,7 @@
-# L1ES-L2FR-Effect
+# L1FR-L2ES-Effect
 
 Name: Christina Vega-Alemany
-Project title: Frangles: The L1 Spanish Effect on L2 French Paraphrastic Future
+Project title: Franglés: The L1 French Effect on L2 Spanish Periphrastic Future
 
 
-Description: Christina's Data Science term project analyzing whether L1 Spanish affects acquisition of paraphrastic future in L2 French. This will be an analysis of written corpus data from L1 speakers of Spanish learning L2 French. 
+Description: Christina's Data Science term project analyzing whether L1 French affects acquisition of periphrastic future in L2 Spanish. This will be an analysis of written corpus data from L1 speakers of French learning L2 Spanish. 
