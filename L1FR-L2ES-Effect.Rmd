@@ -1,0 +1,71 @@
+---
+title: "L1FR-L2ES-Effect"
+author: "CMVA"
+date: "2024-11-07"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(stringr)
+library(dplyr)
+library(ggplot2)
+```
+
+# Initial Read-in
+
+The first thing I did with my data prior to reading it in was combine all of the data into one csv file. I downloaded the data from the corpus originally as separate excel files that were all A1 level Spanish learners, but each file was for a different conjugation of the verb *ir* 'to go'.
+
+Now that the files have been combined, I am going to read in the singular csv file:
+```{r read in}
+#A1IR <- read.csv("C:/Users/vegam/OneDrive/Documents/L1FR-L2ES-Effect/A1IR.csv")
+
+A1IR <- read_csv("A1IR.csv")
+```
+
+**Note**: All of the downloaded data is in Spanish, so this will most likely be translated for ease of understanding. Will be consulting Dan about this later.
+
+# Tidying
+
+The first thing I want to do with my dataset is see if there are any duplicate productions from the same participant within the different conjugations of "voy".
+```{r duplicate}
+A1IR
+unique(A1IR$Estudiante)
+count(A1IR, Estudiante)
+
+A1IRNEW <- A1IR %>%
+  group_by(Estudiante)
+A1IRNEW
+```
+Based on the information above, we see that there are a total of 48 participants, with each participant having a different number of total productions. If we group by the participants, it brings our participant total from 166 to 48 to account for repetitions.
+
+The second thing I am going to do is remove any columns I deem unnecessary for my analyses. These include the L1 column because they are all French anyway, as well as the 17th and 18th columns, as they have no data.
+```{r column removal}
+?select()
+A1IR <- subset(A1IRNEW, select = -c(L1, `Palabra ortográfica 1`, `Información adicional 1`))
+A1IR
+```
+
+
+My next step is to rename some column names for those that are a bit longer. The first step is to see which columns are present in the data.
+```{r columns}
+colnames(A1IR)
+?rename()
+rename(A1IR, EdadIn = `Edad de inicio en el estudio del español`,
+       Meses = `Número de meses estudiando español`,
+       Contactos = `Contactos personales en países de habla española`)
+```
+
+# Basic Statistics
+
+Now, I am going to do some basic statistical inquiries, just to see the range of ages, as well as what country they are from, how old they were when they started (to calculate how long they have been learning Spanish), etc.
+```{r age}
+mean(A1IR$Edad)
+
+A1EDAD <- A1IR %>% 
+  group_by(Edad) %>% 
+  summarise(count = n()) %>% 
+  print(A1EDAD)
+```
+As can be seen above, it appears that ages range from 15 to 71 years old. Not only that, but the age group with the most amount of people is the 61 year-olds who have 13 total individuals. The age group with the least amount of people is the 15, 18, 19, 24, and 44 year-olds who only had one individual per age.

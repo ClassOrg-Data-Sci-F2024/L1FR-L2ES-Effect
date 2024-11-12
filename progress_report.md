@@ -4,6 +4,7 @@ Today I created the repository for my term project and added a README, LICENSE, 
 
 I've decided to go with written corpora data analyzing L1 Spanish speakers' acquisition of paraphrastic future in L2 French.
 
+
 10/28/24, 2:30p
 
 Progress Report 1
@@ -25,3 +26,22 @@ That is my next step. I have all of the tokens, but now I need to organize them 
 Yining Nie has an article titled "TENSE AND MODALITY IN FRENCH VERBAL MORPHOLOGY" from 2015 that I intend to use as an explanation of the periphrastic future in French. This article also mentions the periphrastic future in Spanish, which is perfect for this project, since I initially explained that the two languages' periphrastic futures are the same, hence why I wanted to study any potential transfers from one language to another. If I need more scholarly references to back this up, I can certainly find more.
 
 I intend to make it known that whatever results are found are more specific to those in the corpus and should not be generalized to all L1 French learners of Spanish.
+
+
+11/11/24, 2:46p
+
+Progress Report 2
+
+I have combined all of the downloaded data that I have compiled from the corpus into one Excel sheet to make it easier to 1. read in and 2. sort through in RStudio. I decided after speaking to some classmates last week that it may be best if I stick to analyzing only the different conjugations of the periphrastic future. The reasoning for this rather than doing both the conjugations and different proficiency levels is because if what I aim to analyze is whether there is transfer from the L1, it is best to try to verify that within the A1 group, or those with the least proficiency in the language. This is because those learners do not yet know enough Spanish to understand the complexities of its grammar and tenses. Therefore, they will likely rely on their L1 more to help them until they acquire more experiences within their L2.
+
+I was having lots of trouble reading my file into R studio without using an absolute path. I tried consulting Ben and Dan about this. Dan suggested I have the csv file in the same folder as my Rmd file, so I moved it to the working directory's folder. From there, the read.csv function worked! I think I was trying to overcomplicate it by creating a relative path when in reality there is none because the csv file is not within a folder in the directory.
+
+I did also add a note in my Rmd file which specifies that all of the downloaded data from the corpus is in Spanish. Therefore, to increase understanding for readers who do not understand Spanish, I will most likely edit the columns and rows to reflect the same data but translated. This is also something to consult Dan about.
+
+Other steps:
+- Checked for duplicate participants in the data and grouped the data by participants for more accurate reflection of productions.
+- Pulled out the necessary columns for data analysis
+- Renamed long columns
+- Added titles to sections and chunks
+- Learned that using backticks around column names allows you to have spaces in your words without having to rename the columns
+- Analyzed the age ranges of the participants and how many per age group there is.
