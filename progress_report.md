@@ -45,3 +45,22 @@ Other steps:
 - Added titles to sections and chunks
 - Learned that using backticks around column names allows you to have spaces in your words without having to rename the columns
 - Analyzed the age ranges of the participants and how many per age group there is.
+
+Progress Report 3
+
+11/14/24, 12:04p
+
+- Added a license to my project
+- Translated all column names to English
+
+Progress Report 4
+
+11/21/24, 12:06a
+
+- Redid all the data read-in by separating the excel files, reading them in, then combining them into one dataframe.
+- Renamed everything to go with the new dataframe.
+- Wrote a new csv file for the dataframe.
+- Finished simple stats.
+- Started the final statistical analysis but I kept getting errors so I erased it. Will be readdressing tomorrow.
+- Added some more analysis (written) to the code.
+- Added the session info at the end.
