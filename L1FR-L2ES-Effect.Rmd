@@ -86,9 +86,9 @@ A1IRNEW %>%
 ```
 Based on the information above, we see that there are a total of 48 students with French as their L1, with each participant having a different number of total productions.As for English, there are 35 total students with English as their L1. In total, we have 83 total students in this dataset.
 
-The second thing I am going to do is remove any columns I deem unnecessary for my analyses. These include the L1 column because they are all French anyway, as well as the 17th and 18th columns, as they have no data.
+The second thing I am going to do is remove any columns I deem unnecessary for my analyses. These include the 17th and 18th columns, as they have no data.
 ```{r column removal}
-A1 <- subset(A1IRNEW, select = -c(L1, OrthoWord1, ExInfo1))
+A1 <- subset(A1IRNEW, select = -c(OrthoWord1, ExInfo1))
 A1
 ```
 
@@ -165,8 +165,8 @@ As can be seen above, it appears that ages in the L1 French dataset range from 1
 
 ```{r A1 a}
 CA1 <- A1 %>%
-    mutate(FirstWord = sub(" .*", "", ContextR))
-CA1
+    mutate(First2 = sub("^([[:alpha:]]+ [[:alpha:]]+).*", "\\1", ContextR))
+
 
 # If needed, save the modified data frame to a new object or overwrite the existing one
 A1 <- CA1
@@ -175,7 +175,54 @@ A1
 
 # Statistical Analyses
 
+```{r model 1}
+
+A1 <- A1 %>% 
+  mutate(Correct = ifelse(grepl("^a.*r$", First2), 1, 0))
+
+print(A1)
+
+summary_df <- A1 %>%
+    group_by(Age, Gender, Country) %>%
+    summarise(CorrectAnswers = sum(Correct))
+
+print(summary_df)
+
+model1 <- glm(Correct ~ Age + Gender + Country, data = A1, family = binomial)
+
+summary(model1)
+```
+
+```{r model 2}
+model2 <- glm(Correct ~ L1 + AgeStart + Months + Contacts, data = A1, family = binomial)
+
+summary(model2)
+```
+```{r model 3}
+model3 <- glm(Correct ~ L1 + Country, data = A1, family = binomial)
+
+summary(model3)
+```
+# Visualizations
+
+```{r}
+```
+
+```{r}
+count(A1, Correct)
+unique(A1$Correct)
+```
+
+```{r plot 1}
+ggplot(A1, aes(x = Correct, y = Country)) +
+  geom_point(color = "red", size = 1) +
+  labs(title = "Scatter Plot of Country vs. Correctness", x = "Country", y = "Correctness") + 
+  theme_minimal()
+```
+
+
 ```{r session info}
+library(sessioninfo)
 session_info()
 ```
 

@@ -64,3 +64,12 @@ Progress Report 4
 - Started the final statistical analysis but I kept getting errors so I erased it. Will be readdressing tomorrow.
 - Added some more analysis (written) to the code.
 - Added the session info at the end.
+
+Progress Report 5
+
+11/21/24, 10:47p
+
+- After consulting the class, I finally figured out what I was doing wrong and was able to run a logistic regression for my data. So data wrangling is concluded!
+- I started visualization which I will finish tomorrow.
+- I organized the Excel and Csv files into folders in the repo because things were getting cluttered and hard to find on GitHub
+- Linked my Rmd file and the folders into this md file so readers do not have to go back and forth :)
