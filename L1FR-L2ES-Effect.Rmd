@@ -23,21 +23,25 @@ There are two datasets: L1 French speakers and L1 English speakers. These were c
 
 The individual Excel files will be read in and then combined into one dataset (per language) for analysis.
 
+```{r}
+getwd()
+```
+
 ```{r read-in}
-read_excel("A1IR.xlsx")
-read_excel("A1VOY.xlsx")
-read_excel("A1VAS.xlsx")
-read_excel("A1VA.xlsx")
-read_excel("A1VAMOS.xlsx")
-read_excel("IRENG.xlsx")
-read_excel("VOYENG.xlsx")
-read_excel("VASENG.xlsx")
-read_excel("VAENG.xlsx")
-read_excel("VAMOSENG.xlsx")
-read_excel("VANENG.xlsx")
+read_excel("Excels/A1IR.xlsx")
+read_excel("Excels/A1VOY.xlsx")
+read_excel("Excels/A1VAS.xlsx")
+read_excel("Excels/A1VA.xlsx")
+read_excel("Excels/A1VAMOS.xlsx")
+read_excel("Excels/IRENG.xlsx")
+read_excel("Excels/VOYENG.xlsx")
+read_excel("Excels/VASENG.xlsx")
+read_excel("Excels/VAENG.xlsx")
+read_excel("Excels/VAMOSENG.xlsx")
+read_excel("Excels/VANENG.xlsx")
 ```
 ```{r combine}
-FRENG <- list.files(path = ".", pattern = "*.xlsx*", all.files = FALSE, full.names = FALSE, recursive = FALSE)
+FRENG <- list.files(path = "Excels", pattern = "*.xlsx*", all.files = TRUE, full.names = TRUE, recursive = FALSE)
 A1 <- FRENG %>%
     set_names() %>%
     map_dfr(read_excel, .id = "Source")

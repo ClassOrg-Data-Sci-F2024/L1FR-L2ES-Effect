@@ -69,7 +69,12 @@ Progress Report 5
 
 11/21/24, 10:47p
 
-- After consulting the class, I finally figured out what I was doing wrong and was able to run a logistic regression for my data. So data wrangling is concluded!
+[Rmd file](https://github.com/ClassOrg-Data-Sci-F2024/L1FR-L2ES-Effect/blob/main/L1FR-L2ES-Effect.Rmd)
+[Knitted md](https://github.com/ClassOrg-Data-Sci-F2024/L1FR-L2ES-Effect/blob/main/L1FR-L2ES-Effect.md)
+[Excel files](https://github.com/ClassOrg-Data-Sci-F2024/L1FR-L2ES-Effect/tree/main/Excel%20Files)
+[Csv files](https://github.com/ClassOrg-Data-Sci-F2024/L1FR-L2ES-Effect/tree/main/Csv%20Files)
+
+- After consulting the class, I finally figured out what I was doing wrong and was able to run a logistic regression for my data. So data wrangling is concluded! Thank you Ben and Dan!
 - I started visualization which I will finish tomorrow.
 - I organized the Excel and Csv files into folders in the repo because things were getting cluttered and hard to find on GitHub
 - Linked my Rmd file and the folders into this md file so readers do not have to go back and forth :)
