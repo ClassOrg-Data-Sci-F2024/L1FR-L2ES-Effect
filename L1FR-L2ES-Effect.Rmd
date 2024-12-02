@@ -3,6 +3,8 @@ title: "L1FR-L2ES-Effect"
 author: "CMVA"
 date: "2024-11-07"
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
