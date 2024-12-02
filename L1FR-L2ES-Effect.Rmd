@@ -187,43 +187,68 @@ A1 <- A1 %>%
 print(A1)
 
 summary_df <- A1 %>%
-    group_by(Age, Gender, Country) %>%
+    group_by(Age, Gender, Country, L1) %>%
     summarise(CorrectAnswers = sum(Correct))
 
 print(summary_df)
 
-model1 <- glm(Correct ~ Age + Gender + Country, data = A1, family = binomial)
+model1 <- glm(Correct ~ Age + AgeStart + Gender + Country + Months + Studies + Contacts + L1, data = A1, family = binomial)
 
 summary(model1)
 ```
+## Analysis - Model 1
 
-```{r model 2}
-model2 <- glm(Correct ~ L1 + AgeStart + Months + Contacts, data = A1, family = binomial)
+Significant factors: Age, AgeStart (most), Being from Canada, Starting in Primary School, Starting in Uni (more than Primary)
 
-summary(model2)
-```
-```{r model 3}
-model3 <- glm(Correct ~ L1 + Country, data = A1, family = binomial)
+Almost Significant: Being from South Korea (crazy!), having family members who speak Spanish, and having English as an L1.
 
-summary(model3)
-```
 # Visualizations
 
-```{r}
-```
-
-```{r}
-count(A1, Correct)
-unique(A1$Correct)
-```
-
 ```{r plot 1}
-ggplot(A1, aes(x = Correct, y = Country)) +
-  geom_point(color = "red", size = 1) +
-  labs(title = "Scatter Plot of Country vs. Correctness", x = "Country", y = "Correctness") + 
+ggplot(model1, aes(AgeStart)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Age Start vs. Correctness", x = "Age", y = "Correctness") + 
   theme_minimal()
 ```
+Plot 1 shows that the largest number of correctness came from those who started learning Spanish from birth.
 
+```{r plot 2}
+ggplot(model1, aes(Age)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Age vs. Correctness", x = "Age", y = "Correctness") + 
+  theme_minimal()
+```
+Plot 2 shows that those who were around 50 years old had the most correct answers.
+
+```{r plot 3}
+ggplot(model1, aes(Country)) +
+  geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Country vs. Correctness", x = "Country", y = "Correctness") +
+  theme(axis.text.x = element_text(angle = 90)) 
+```
+Plot 3 shows that those who are from France had the most correct productions of the periphrastic future in French. Although interesting, it was Canada that had a significant effect on the correctness according to the logistic regression.
+
+```{r plot 4}
+ggplot(model1, aes(Studies)) +
+  geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of When Students Started Studying Spanish vs. Correctness", x = "When Started", y = "Correctness") +
+  theme_minimal()
+```
+Plot 4 shows that those who started learning Spanish at their university had the most correct answers. The regression analysis shows that both those who started in primary school and at their university had the most significant effect on their correctness, with university learners having slightly more significance (about 0.02 more significance).
+```{r plot 5}
+ggplot(model1, aes(L1)) +
+  geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of L1 vs. Correctness", x = "L1", y = "Correctness") +
+  theme_minimal()
+```
+Plot 5 shows that those whose L1 is French had more correct answers. This actually answers my main research question, which was whether having French as an L1 allows one to have more correct productions than English speakers. According to the regression, having English as an L1 was *almost* significant. The negative estimate for L1 English means that having an L1 of English reduced the production of correct periphrastic future sentences.
+```{r plot 6}
+ggplot(model1, aes(Contacts)) +
+  geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Contacts Who Speak Spanish vs. Correctness", x = "Contacts", y = "Correctness") +
+  theme_minimal()
+```
+Plot 6 shows that participants with no contact who speaks Spanish had the most correct periphrastic future productions. According to the regression analysis, those with family members who speak Spanish almost had a significant effect on correctness. Its negative estimate means that having family members who speak Spanish reduces the correct productions, which is interesting, considering that should actually be more helpful. But with consideration, they may have a different, less prescriptive production of Spanish which may in turn confuse the participant.
 
 ```{r session info}
 library(sessioninfo)
