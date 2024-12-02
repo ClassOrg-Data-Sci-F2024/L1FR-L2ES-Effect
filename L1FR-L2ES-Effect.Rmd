@@ -182,7 +182,6 @@ A1
 # Statistical Analyses
 
 ```{r model 1}
-
 A1 <- A1 %>% 
   mutate(Correct = ifelse(grepl("^a.*r$", First2), 1, 0))
 
@@ -198,6 +197,7 @@ model1 <- glm(Correct ~ Age + AgeStart + Gender + Country + Months + Studies + C
 
 summary(model1)
 ```
+
 ## Analysis - Model 1
 
 Significant factors: Age, AgeStart (most), Being from Canada, Starting in Primary School, Starting in Uni (more than Primary)
@@ -233,7 +233,7 @@ Plot 3 shows that those who are from France had the most correct productions of 
 ```{r plot 4}
 ggplot(model1, aes(Studies)) +
   geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
-  labs(title = "Bar Plot of When Students Started Studying Spanish vs. Correctness", x = "When Started", y = "Correctness") +
+  labs(title = "Bar Plot of Where Students Started Studying Spanish vs. Correctness", x = "When Started", y = "Correctness") +
   theme_minimal()
 ```
 Plot 4 shows that those who started learning Spanish at their university had the most correct answers. The regression analysis shows that both those who started in primary school and at their university had the most significant effect on their correctness, with university learners having slightly more significance (about 0.02 more significance).
@@ -244,6 +244,7 @@ ggplot(model1, aes(L1)) +
   theme_minimal()
 ```
 Plot 5 shows that those whose L1 is French had more correct answers. This actually answers my main research question, which was whether having French as an L1 allows one to have more correct productions than English speakers. According to the regression, having English as an L1 was *almost* significant. The negative estimate for L1 English means that having an L1 of English reduced the production of correct periphrastic future sentences.
+
 ```{r plot 6}
 ggplot(model1, aes(Contacts)) +
   geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
