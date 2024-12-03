@@ -777,12 +777,11 @@ A1AGE <- A1 %>%
     ## 10    27    17
     ## # ℹ 28 more rows
 
-As can be seen above, it appears that ages in the L1 French dataset
-range from 15 to 71 years old. Not only that, but the age group with the
-most amount of students is the 61 year-olds who have 13 total
-individuals. The age group with the least amount of students is the 15,
-18, 19, 24, and 44 year-olds who only had one individual per age. (*need
-to edit this for ENG*)
+As can be seen above, it appears that ages in the dataset range from 15
+to 71 years old. Not only that, but the age group with the most amount
+of students is the 61 year-olds who have 13 total individuals. The age
+group with the least amount of students is the 15, 18, 19, 24, and 44
+year-olds who only had one individual per age.
 
 # Picking Out the Prescriptive Output
 
@@ -845,187 +844,197 @@ print(A1)
 
 ``` r
 summary_df <- A1 %>%
-    group_by(Age, Gender, Country) %>%
+    group_by(Age, Gender, Country, L1) %>%
     summarise(CorrectAnswers = sum(Correct))
 ```
 
-    ## `summarise()` has grouped output by 'Age', 'Gender'. You can override using the
-    ## `.groups` argument.
+    ## `summarise()` has grouped output by 'Age', 'Gender', 'Country'. You can
+    ## override using the `.groups` argument.
 
 ``` r
 print(summary_df)
 ```
 
-    ## # A tibble: 76 × 4
-    ## # Groups:   Age, Gender [55]
-    ##      Age Gender Country        CorrectAnswers
-    ##    <dbl> <chr>  <chr>                   <dbl>
-    ##  1    15 Hombre Estados Unidos              1
-    ##  2    15 Hombre Francia                     0
-    ##  3    15 Mujer  Irlanda                     0
-    ##  4    16 Hombre Japón                       1
-    ##  5    16 Hombre Mónaco                      4
-    ##  6    16 Mujer  Japón                       0
-    ##  7    18 Mujer  Francia                     2
-    ##  8    19 Mujer  Líbano                      0
-    ##  9    22 Mujer  Corea del Sur               4
-    ## 10    22 Mujer  Francia                     2
+    ## # A tibble: 76 × 5
+    ## # Groups:   Age, Gender, Country [76]
+    ##      Age Gender Country        L1      CorrectAnswers
+    ##    <dbl> <chr>  <chr>          <chr>            <dbl>
+    ##  1    15 Hombre Estados Unidos Inglés               1
+    ##  2    15 Hombre Francia        Francés              0
+    ##  3    15 Mujer  Irlanda        Inglés               0
+    ##  4    16 Hombre Japón          Inglés               1
+    ##  5    16 Hombre Mónaco         Francés              4
+    ##  6    16 Mujer  Japón          Inglés               0
+    ##  7    18 Mujer  Francia        Francés              2
+    ##  8    19 Mujer  Líbano         Francés              0
+    ##  9    22 Mujer  Corea del Sur  Inglés               4
+    ## 10    22 Mujer  Francia        Francés              2
     ## # ℹ 66 more rows
 
 ``` r
-model1 <- glm(Correct ~ Age + Gender + Country, data = A1, family = binomial)
+model1 <- glm(Correct ~ Age + AgeStart + Gender + Country + Months + Studies + Contacts + L1, data = A1, family = binomial)
 
 summary(model1)
 ```
 
     ## 
     ## Call:
-    ## glm(formula = Correct ~ Age + Gender + Country, family = binomial, 
-    ##     data = A1)
+    ## glm(formula = Correct ~ Age + AgeStart + Gender + Country + Months + 
+    ##     Studies + Contacts + L1, family = binomial, data = A1)
     ## 
     ## Coefficients:
-    ##                          Estimate Std. Error z value Pr(>|z|)  
-    ## (Intercept)            -1.842e+00  1.146e+00  -1.608   0.1079  
-    ## Age                    -1.170e-03  8.627e-03  -0.136   0.8921  
-    ## GenderMujer             1.556e-01  2.745e-01   0.567   0.5708  
-    ## CountryBélgica          1.432e+00  1.181e+00   1.212   0.2254  
-    ## CountryCanadá           3.227e+00  1.338e+00   2.412   0.0159 *
-    ## CountryChina            2.814e+00  1.586e+00   1.775   0.0760 .
-    ## CountryColombia        -1.570e+01  2.797e+03  -0.006   0.9955  
-    ## CountryCorea del Sur    2.489e+00  1.292e+00   1.927   0.0540 .
-    ## CountryCosta de Marfil  1.928e+01  1.399e+03   0.014   0.9890  
-    ## CountryEstados Unidos   3.459e-01  1.337e+00   0.259   0.7959  
-    ## CountryFilipinas       -1.567e+01  3.956e+03  -0.004   0.9968  
-    ## CountryFrancia          1.279e+00  1.097e+00   1.166   0.2437  
-    ## CountryGuinea          -1.584e+01  1.319e+03  -0.012   0.9904  
-    ## CountryIrlanda          2.313e-01  1.133e+00   0.204   0.8383  
-    ## CountryJapón            6.828e-01  1.591e+00   0.429   0.6678  
-    ## CountryLíbano           4.754e-01  1.225e+00   0.388   0.6980  
-    ## CountryMarruecos       -1.583e+01  1.978e+03  -0.008   0.9936  
-    ## CountryMónaco           3.247e+00  1.577e+00   2.059   0.0395 *
-    ## CountryReino Unido     -1.576e+01  1.318e+03  -0.012   0.9905  
-    ## CountrySuiza           -1.569e+01  1.978e+03  -0.008   0.9937  
+    ##                             Estimate Std. Error z value Pr(>|z|)   
+    ## (Intercept)                2.198e-01  1.715e+00   0.128  0.89802   
+    ## Age                       -2.215e-02  1.076e-02  -2.059  0.03949 * 
+    ## AgeStart                   1.778e-02  6.518e-03   2.728  0.00638 **
+    ## GenderMujer                1.441e-01  3.227e-01   0.447  0.65511   
+    ## CountryBélgica            -5.554e-01  1.717e+00  -0.323  0.74636   
+    ## CountryCanadá              3.440e+00  1.515e+00   2.270  0.02321 * 
+    ## CountryChina               1.340e+00  1.743e+00   0.769  0.44205   
+    ## CountryColombia           -1.759e+01  2.797e+03  -0.006  0.99498   
+    ## CountryCorea del Sur       2.508e+00  1.332e+00   1.883  0.05964 . 
+    ## CountryCosta de Marfil     1.727e+01  1.399e+03   0.012  0.99015   
+    ## CountryEstados Unidos     -1.745e-01  1.410e+00  -0.124  0.90151   
+    ## CountryFilipinas          -1.622e+01  3.956e+03  -0.004  0.99673   
+    ## CountryFrancia            -5.788e-01  1.633e+00  -0.354  0.72297   
+    ## CountryGuinea             -1.912e+01  1.309e+03  -0.015  0.98834   
+    ## CountryIrlanda             2.972e-01  1.199e+00   0.248  0.80428   
+    ## CountryJapón               2.085e+00  1.815e+00   1.148  0.25079   
+    ## CountryLíbano             -1.461e+00  1.771e+00  -0.825  0.40959   
+    ## CountryMarruecos          -1.776e+01  1.852e+03  -0.010  0.99235   
+    ## CountryMónaco              2.319e+00  2.080e+00   1.115  0.26497   
+    ## CountryReino Unido        -1.618e+01  1.315e+03  -0.012  0.99019   
+    ## CountrySuiza              -1.705e+01  1.978e+03  -0.009  0.99312   
+    ## Months                    -2.826e-02  1.778e-02  -1.590  0.11186   
+    ## StudiesPrimaria            1.057e+00  5.368e-01   1.970  0.04884 * 
+    ## StudiesSecundaria          8.551e-02  5.343e-01   0.160  0.87285   
+    ## StudiesUniversidad         7.732e-01  3.493e-01   2.214  0.02686 * 
+    ## ContactsAmigos&Familiares -5.927e-01  7.272e-01  -0.815  0.41502   
+    ## ContactsFamiliares        -9.167e-01  5.474e-01  -1.675  0.09400 . 
+    ## ContactsNo                 8.068e-02  3.373e-01   0.239  0.81096   
+    ## ContactsOtros              1.040e+00  8.076e-01   1.287  0.19794   
+    ## L1Inglés                  -2.150e+00  1.221e+00  -1.760  0.07834 . 
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## (Dispersion parameter for binomial family taken to be 1)
     ## 
     ##     Null deviance: 534.41  on 417  degrees of freedom
-    ## Residual deviance: 453.99  on 398  degrees of freedom
-    ## AIC: 493.99
+    ## Residual deviance: 426.47  on 388  degrees of freedom
+    ## AIC: 486.47
     ## 
     ## Number of Fisher Scoring iterations: 16
 
-``` r
-model2 <- glm(Correct ~ L1 + AgeStart + Months + Contacts, data = A1, family = binomial)
+## Analysis - Model 1
 
-summary(model2)
-```
+Significant factors: Age, AgeStart (most), Being from Canada, Starting
+in Primary School, Starting in Uni (more than Primary)
 
-    ## 
-    ## Call:
-    ## glm(formula = Correct ~ L1 + AgeStart + Months + Contacts, family = binomial, 
-    ##     data = A1)
-    ## 
-    ## Coefficients:
-    ##                            Estimate Std. Error z value Pr(>|z|)  
-    ## (Intercept)               -0.383808   0.275678  -1.392   0.1639  
-    ## L1Inglés                  -0.587421   0.238937  -2.458   0.0140 *
-    ## AgeStart                   0.008710   0.004464   1.951   0.0510 .
-    ## Months                    -0.011658   0.013487  -0.864   0.3874  
-    ## ContactsAmigos&Familiares -0.183911   0.420161  -0.438   0.6616  
-    ## ContactsFamiliares        -0.983352   0.504643  -1.949   0.0513 .
-    ## ContactsNo                -0.312647   0.264279  -1.183   0.2368  
-    ## ContactsOtros             -0.442862   0.502897  -0.881   0.3785  
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## (Dispersion parameter for binomial family taken to be 1)
-    ## 
-    ##     Null deviance: 534.41  on 417  degrees of freedom
-    ## Residual deviance: 519.92  on 410  degrees of freedom
-    ## AIC: 535.92
-    ## 
-    ## Number of Fisher Scoring iterations: 4
-
-``` r
-model3 <- glm(Correct ~ L1 + Country, data = A1, family = binomial)
-
-summary(model3)
-```
-
-    ## 
-    ## Call:
-    ## glm(formula = Correct ~ L1 + Country, family = binomial, data = A1)
-    ## 
-    ## Coefficients:
-    ##                          Estimate Std. Error z value Pr(>|z|)  
-    ## (Intercept)            -3.143e-01  1.526e+00  -0.206   0.8368  
-    ## L1Inglés               -1.477e+00  1.078e+00  -1.370   0.1706  
-    ## CountryBélgica         -4.126e-03  1.595e+00  -0.003   0.9979  
-    ## CountryCanadá           3.296e+00  1.333e+00   2.472   0.0134 *
-    ## CountryChina            2.890e+00  1.581e+00   1.828   0.0675 .
-    ## CountryColombia        -1.725e+01  2.797e+03  -0.006   0.9951  
-    ## CountryCorea del Sur    2.485e+00  1.291e+00   1.925   0.0543 .
-    ## CountryCosta de Marfil  1.788e+01  1.399e+03   0.013   0.9898  
-    ## CountryEstados Unidos   2.877e-01  1.333e+00   0.216   0.8292  
-    ## CountryFilipinas       -1.577e+01  3.956e+03  -0.004   0.9968  
-    ## CountryFrancia         -1.542e-01  1.520e+00  -0.101   0.9192  
-    ## CountryGuinea          -1.725e+01  1.319e+03  -0.013   0.9896  
-    ## CountryIrlanda          1.823e-01  1.125e+00   0.162   0.8713  
-    ## CountryJapón            6.931e-01  1.581e+00   0.438   0.6611  
-    ## CountryLíbano          -9.384e-01  1.628e+00  -0.576   0.5644  
-    ## CountryMarruecos       -1.725e+01  1.978e+03  -0.009   0.9930  
-    ## CountryMónaco           1.701e+00  1.892e+00   0.899   0.3687  
-    ## CountryReino Unido     -1.577e+01  1.319e+03  -0.012   0.9905  
-    ## CountrySuiza           -1.725e+01  1.978e+03  -0.009   0.9930  
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## (Dispersion parameter for binomial family taken to be 1)
-    ## 
-    ##     Null deviance: 534.41  on 417  degrees of freedom
-    ## Residual deviance: 451.81  on 399  degrees of freedom
-    ## AIC: 489.81
-    ## 
-    ## Number of Fisher Scoring iterations: 16
+Almost Significant: Being from South Korea (crazy!), having family
+members who speak Spanish, and having English as an L1.
 
 # Visualizations
 
 ``` r
-count(A1, Correct)
-```
-
-    ## # A tibble: 116 × 3
-    ## # Groups:   Student [83]
-    ##    Student Correct     n
-    ##    <chr>     <dbl> <int>
-    ##  1 101           0     9
-    ##  2 101           1     1
-    ##  3 1075          0     1
-    ##  4 1239          0     3
-    ##  5 1239          1     4
-    ##  6 1270          0     5
-    ##  7 1270          1     4
-    ##  8 1333          0     1
-    ##  9 1333          1     3
-    ## 10 138           0     2
-    ## # ℹ 106 more rows
-
-``` r
-unique(A1$Correct)
-```
-
-    ## [1] 0 1
-
-``` r
-ggplot(A1, aes(x = Correct, y = Country)) +
-  geom_point(color = "red", size = 1) +
-  labs(title = "Scatter Plot of Country vs. Correctness", x = "Country", y = "Correctness") + 
+ggplot(model1, aes(AgeStart)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Age Start vs. Correctness", x = "Age", y = "Correctness") + 
   theme_minimal()
 ```
 
-![](L1FR-L2ES-Effect_files/figure-gfm/plot%201-1.png)<!-- -->
+    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `linewidth` instead.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
+![](L1FR-L2ES-Effect_files/figure-gfm/plot%201-1.png)<!-- --> Plot 1
+shows that the largest number of correctness came from those who started
+learning Spanish from birth.
+
+``` r
+ggplot(model1, aes(Age)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Age vs. Correctness", x = "Age", y = "Correctness") + 
+  theme_minimal()
+```
+
+![](L1FR-L2ES-Effect_files/figure-gfm/plot%202-1.png)<!-- --> Plot 2
+shows that those who were around 50 years old had the most correct
+answers.
+
+``` r
+ggplot(model1, aes(Country)) +
+  geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Country vs. Correctness", x = "Country", y = "Correctness") +
+  theme(axis.text.x = element_text(angle = 90)) 
+```
+
+![](L1FR-L2ES-Effect_files/figure-gfm/plot%203-1.png)<!-- --> Plot 3
+shows that those who are from France had the most correct productions of
+the periphrastic future in French. Although interesting, it was Canada
+that had a significant effect on the correctness according to the
+logistic regression.
+
+``` r
+ggplot(model1, aes(Studies)) +
+  geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Where Students Started Studying Spanish vs. Correctness", x = "When Started", y = "Correctness") +
+  theme_minimal()
+```
+
+![](L1FR-L2ES-Effect_files/figure-gfm/plot%204-1.png)<!-- --> Plot 4
+shows that those who started learning Spanish at their university had
+the most correct answers. The regression analysis shows that both those
+who started in primary school and at their university had the most
+significant effect on their correctness, with university learners having
+slightly more significance (about 0.02 more significance).
+
+``` r
+ggplot(model1, aes(L1)) +
+  geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of L1 vs. Correctness", x = "L1", y = "Correctness") +
+  theme_minimal()
+```
+
+![](L1FR-L2ES-Effect_files/figure-gfm/plot%205-1.png)<!-- --> Plot 5
+shows that those whose L1 is French had more correct answers. This
+actually answers my main research question, which was whether having
+French as an L1 allows one to have more correct productions than English
+speakers. According to the regression, having English as an L1 was
+*almost* significant. The negative estimate for L1 English means that
+having an L1 of English reduced the production of correct periphrastic
+future sentences.
+
+``` r
+ggplot(model1, aes(Contacts)) +
+  geom_bar(width = 0.5, color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Contacts Who Speak Spanish vs. Correctness", x = "Contacts", y = "Correctness") +
+  theme_minimal()
+```
+
+![](L1FR-L2ES-Effect_files/figure-gfm/plot%206-1.png)<!-- --> Plot 6
+shows that participants with no contact who speaks Spanish had the most
+correct periphrastic future productions. According to the regression
+analysis, those with family members who speak Spanish almost had a
+significant effect on correctness. Its negative estimate means that
+having family members who speak Spanish reduces the correct productions,
+which is interesting, considering that should actually be more helpful.
+But with consideration, they may have a different, less prescriptive
+production of Spanish which may in turn confuse the participant.
+
+# Conclusion
+
+Based on the information provided above, both research questions were
+answered. First of all, having French as an L1 *does* in fact help
+participants produce the periphrastic future better than those who have
+English as an L1. As for the second question, the factors that affect
+periphrastic future production in L2 Spanish are the age when they
+started learning, their current age, whether or not they have any
+contacts who speak Spanish, what country they are from, what their L1
+is, and what school they were in when they learned/started learning
+Spanish. The age when they started learning proved to be the most
+significant factor based on the logistic regression model.
 
 ``` r
 library(sessioninfo)
@@ -1047,7 +1056,7 @@ session_info()
     ##  collate  English_United States.utf8
     ##  ctype    English_United States.utf8
     ##  tz       America/New_York
-    ##  date     2024-11-21
+    ##  date     2024-12-02
     ##  pandoc   3.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
@@ -1055,6 +1064,7 @@ session_info()
     ##  cellranger    1.1.0   2016-07-27 [1] CRAN (R 4.4.1)
     ##  cli           3.6.3   2024-06-21 [1] CRAN (R 4.4.1)
     ##  colorspace    2.1-1   2024-07-26 [1] CRAN (R 4.4.1)
+    ##  crayon        1.5.3   2024-06-20 [1] CRAN (R 4.4.1)
     ##  digest        0.6.37  2024-08-19 [1] CRAN (R 4.4.1)
     ##  dplyr       * 1.1.4   2023-11-17 [1] CRAN (R 4.4.1)
     ##  evaluate      0.24.0  2024-06-10 [1] CRAN (R 4.4.1)

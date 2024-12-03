@@ -157,7 +157,7 @@ unique(A1$Country)
 count(A1, Studies)
 ```
 
-```{r age FR}
+```{r age}
 mean(A1$Age)
 
 A1AGE <- A1 %>% 
@@ -165,7 +165,7 @@ A1AGE <- A1 %>%
   summarise(count = n())
   print(A1AGE)
 ```
-As can be seen above, it appears that ages in the L1 French dataset range from 15 to 71 years old. Not only that, but the age group with the most amount of students is the 61 year-olds who have 13 total individuals. The age group with the least amount of students is the 15, 18, 19, 24, and 44 year-olds who only had one individual per age. (*need to edit this for ENG*)
+As can be seen above, it appears that ages in the dataset range from 15 to 71 years old. Not only that, but the age group with the most amount of students is the 61 year-olds who have 13 total individuals. The age group with the least amount of students is the 15, 18, 19, 24, and 44 year-olds who only had one individual per age.
 
 # Picking Out the Prescriptive Output
 
@@ -252,6 +252,10 @@ ggplot(model1, aes(Contacts)) +
   theme_minimal()
 ```
 Plot 6 shows that participants with no contact who speaks Spanish had the most correct periphrastic future productions. According to the regression analysis, those with family members who speak Spanish almost had a significant effect on correctness. Its negative estimate means that having family members who speak Spanish reduces the correct productions, which is interesting, considering that should actually be more helpful. But with consideration, they may have a different, less prescriptive production of Spanish which may in turn confuse the participant.
+
+# Conclusion
+
+Based on the information provided above, both research questions were answered. First of all, having French as an L1 *does* in fact help participants produce the periphrastic future better than those who have English as an L1. As for the second question, the factors that affect periphrastic future production in L2 Spanish are the age when they started learning, their current age, whether or not they have any contacts who speak Spanish, what country they are from, what their L1 is, and what school they were in when they learned/started learning Spanish. The age when they started learning proved to be the most significant factor based on the logistic regression model.
 
 ```{r session info}
 library(sessioninfo)

@@ -1,10 +1,5 @@
----
-output:
-  html_document: default
-  pdf_document: default
----
 # Introduction
-Spanish and French are two languages that have been widely studied within in the field of Linguistics. Spain and France also share a border, having influenced each other over the centuries as well as having fought for power against one another. Both of Latin origin and romance languages, many are aware of the similarities between the two languages. One example of this is the verb “to sleep,” which translates to “dormir” in both Spanish and French. Similarly, French and Spanish form the periphrastic future (“I am going to __”) in the same way. The periphrastic future is formed in both languages by combining the verb “to go” and the preposition “to”, which in French, is implied when using an infinitive verb. Below are examples in both languages:
+Spanish and French are two languages that have been widely studied within in the field of Linguistics. Spain and France also share a border, having influenced each other over the centuries as well as having fought for power against one another. Both of Latin origin and romance languages, many are aware of the similarities between the two languages. One example of this is the verb “to sleep,” which translates to “dormir” in both Spanish and French. Similarly, French and Spanish form the periphrastic future (“I am going to __”) in a similar way. The periphrastic future is formed in both languages by combining the verb “to go” and the preposition “to”, followed by an infinitive of a verb. In French, the preposition "to" is implied when using an infinitive verb. Below are examples in both languages:
 
 English: I am going to eat with a friend. (verb: to go)
 
@@ -12,17 +7,17 @@ French: Je vais manger avec une amie. (verb: aller)
 
 Spanish: (Yo) voy a comer con una amiga. (verb: ir)
 
-The CAES Corpus, also known as the Corpus de aprendices de Espanol, is a corpus from the Instituto Cervantes (Cervantes Institute) that compiled written data from L2 learners of Spanish. The L2 learners come from 11 different L1s, and in total, there are 56, 429 distinct morphemes.  The corpus is open to the public and allows anyone to search for any linguistic phenomenon (such as the periphrastic future) and filter it by Spanish Proficiency Level, L1, Country, Sex, Age, Student Number, Text Theme, and Type of Text.
+The CAES Corpus, also known as the Corpus de Aprendices de Español, is a corpus from the Instituto Cervantes (Cervantes Institute) that compiled written data from L2 learners of Spanish. The L2 learners come from 11 different L1s, and in total, there are 56, 429 distinct morphemes.  The corpus is open to the public and allows anyone to search for any linguistic phenomenon (such as the periphrastic future) and filter it by Spanish Proficiency Level, L1, Country, Sex, Age, Student Number, Text Theme, and Type of Text.
 
 Knowing the information at hand, the following research questions arise:
--	Does being an L1 speaker of French help L2 learners of Spanish acquire the periphrastic future better compared to L1 English Speakers?
+-	Does being an L1 speaker of French help L2 learners of Spanish acquire the correct productions of periphrastic future better compared to L1 English Speakers?
 -	What factors specifically affect, if at all, one’s ability to acquire periphrastic future in L2 Spanish?
 
 # Data Collection
 
 Acquiring the data in order to analyze it required doing multiple searches on the CAES corpus. The intention was to filter the results by those with either French or English as an L1, and I stuck to those who were in the lowest level of Spanish proficiency (A1). This is due to the fact that those who are at the lowest proficiency have had less time/experience learning Spanish, and therefore will have the least amount of influence from Spanish on their initial productions of the periphrastic future. These are the “purest” productions, one might say.
 
-I split the search into more than just the inifinitive *ir* ‘to go’ plus the preposition *a* ‘to’ due to the fact that in general, multiple pronouns will be used in natural speech which would result in the production of the periphrastic future with several verb conjugations to match each pronoun. Therefore, there were several searches to accommodate each Spanish pronoun with its conjugation of *ir a*:
+I split the search into more than just the infinitive *ir* ‘to go’ plus the preposition *a* ‘to’ due to the fact that in general, multiple pronouns will be used in natural speech which would result in the production of the periphrastic future with several verb conjugations to match each pronoun. Therefore, there were several searches to accommodate each Spanish pronoun with its conjugation of *ir a*:
 
 *Yo voy a*: I am going to
 
@@ -48,6 +43,8 @@ I began my analysis with some basic statistics to understand the basis of the da
 
 There are a total of 48 students with French as their L1, with each participant having a different number of total productions. As for English, there are 35 total students with English as their L1. In total, we have 83 total students in this data set. There are also two types of written texts: e-mails and notes.
 
+Ages in the dataset range from 15 to 71 years old. Not only that, but the age group with the most amount of students is the 61 year-olds who have 13 total individuals. The age group with the least amount of students is the 15, 18, 19, 24, and 44 year-olds who only had one individual per age. The mean age is about 45 years old.
+
 The `contacts` column in the data is meant for the students to relay whether they have any contacts who are Spanish speakers. There were a total of five distinct answers given from the 48 L1 French students:
 1.	No contacts
 2.	“Amigos” -> Friends
@@ -70,6 +67,9 @@ A separate data set was created (A1) in order to pull out all prescriptive produ
 
 A logistic regression was done using the data set with all correct productions to estimate the relationship between correctness and several independent variables: Current age (Age), Age when they starting learning Spanish (AgeStart), participant gender (Gender), country where the participant is from (Country), how many months they spent learning Spanish (Months), what level of school they were in when they started studying Spanish (Studies), if they know anyone who speaks Spanish (Contacts), and what their L1 is, French or English (L1).
 
+![regression 1](L1FR-L2ES-Effect_files/reg1.png)
+![regression 2](L1FR-L2ES-Effect_files/reg2.png)
+
 Based on the regression the significant factors included: Age (p < 0.03949), AgeStart (p < 0.00638, highest), Being from Canada (p < 0.02321), Starting in Primary School (p < 0.04884), Starting in Uni (p < 0.02686, more than Primary). Based on these results, the age at which participants began to learn Spanish had the largest effect on their correctness productions of the periphrastic future in L2 Spanish. This is further supported by the fact that the estimate for AgeStart, 1.778e-02, is a positive number, meaning that the age at which participants started betters the odds of participants having correct productions. If the estimate were negative, then it would mean that the age at which they started learning decreases the odds of correct productions. It is important to note that specifically those who are from Canada had a significant effect on their productions. This makes sense, as French is one of the main languages spoken in Canada other than English, which further supports the data showing French has an important influence on periphrastic future production in L2 Spanish.
 
 Almost Significant: Being from South Korea, having family members who speak Spanish, and having English as an L1.
@@ -84,7 +84,7 @@ Plot 2 shows that those who were around 50 years old had the most correct answer
 
 ![plot 3](L1FR-L2ES-Effect_files/PLOT_COUNTRYVSCORRECT.png)
 
-Plot 3 shows that those who are from France had the most correct productions of the periphrastic future in French. Although interesting, it was Canada that had a significant effect on the correctness according to the logistic regression.
+Plot 3 shows that those who are from France had the most correct productions of the periphrastic future in French. Although interestingly, it was Canada that had a significant effect on the correctness according to the logistic regression. This is most likely due to the fact that Canada has both French and English as official languages, meaning there is more knowledge and experience that can be combined to have a larger effect compared to a country that only speaks one of the two languages.
 
 ![plot 4](L1FR-L2ES-Effect_files/PLOT_WHEREVSCORRECT.png)
 
@@ -104,7 +104,13 @@ In future studies of a similar nature, it would be interesting to compare differ
 
 # Implications
 
-This study reveals that knowledge of French has a strong potential to influence L2 Spanish learners. That being said, in terms of pedagogical resources, when teaching L2 Spanish to L1 French speakers, demonstrating the similarities between the languages either by a textbook or lecture will *help* the students learn Spanish rather than hinder them and make them confuse both languages.
+This study reveals that knowledge of French has a strong potential to influence L2 Spanish learners. That being said, in terms of pedagogical resources, when teaching L2 Spanish to L1 French speakers, demonstrating the similarities between the languages either by a textbook or lecture will *help* the students learn Spanish rather than hinder them and make them confuse both languages. The *vosotros* pronoun should also be included since it is taught prescriptively in L2 Spanish courses and is used in Spain and some parts of South America.
 
 # Process Notes
 The most difficult aspect of this project was finding a corpus that included both Spanish and French. Initially, I wanted to find a corpus of L2 learners of French, but I had no luck, so I switched to L2 learners of Spanish, instead. The search required lots of test searches and playing around with the corpora to see if there was 1. L1 speakers of French and 2. Enough productions to do an analysis on. I also encountered a few issues due to the fact that there were no numbers in my data set, but rather words. I tried many different analyses such as regressions, correlations, etc. I had some guidance from classmates as well as the professor and was able to land on a logistic regression analysis that allowed me to derive statistical results from non-numerical data. I did make a big change towards the end of September, which resulted in the inclusion of the L1 English speakers as well. It was a very necessary addition, due to the fact that there was no way to make a comparison and truly know if L1 French had more of an affect on L2 Spanish periphrastic future if there was no other data set to compare it to.
+
+# Citations
+
+University of Santiago (2011-2022). *Corpus de Aprendices de Español*. Available online at https://galvan.usc.es/caes/search.
+  
+Sánchez, G.R., & Martínez, I.M. (2016). Learner Spanish on computer: the CAES "Corpus de Aprendices de Español" project.
