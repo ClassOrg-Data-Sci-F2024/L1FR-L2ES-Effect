@@ -263,7 +263,7 @@ research question about whether or not L1 French affects the
 periphrastic future productions' correctness. Clearly we can see that it
 does, and based on the positive and significant estimate in the binomial
 logistic regression, being from France does in fact result in more
-correctness.
+correctness. What is interesting is that Ireland has the second highest number of correctness, despite the country's main language *not* being French. This requires further exploration, perhaps into the country's education system, or into the personal experiences of the Irish participants.
 
 ![plot 3](L1FR-L2ES-Effect_files/MONTHSVSCORRECT.png)
 
