@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Introduction
 
 Spanish and French are two languages that have been widely studied
