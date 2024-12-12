@@ -257,6 +257,95 @@ Plot 6 shows that participants with no contact who speaks Spanish had the most c
 
 Based on the information provided above, both research questions were answered. First of all, having French as an L1 *does* in fact help participants produce the periphrastic future better than those who have English as an L1. As for the second question, the factors that affect periphrastic future production in L2 Spanish are the age when they started learning, their current age, whether or not they have any contacts who speak Spanish, what country they are from, what their L1 is, and what school they were in when they learned/started learning Spanish. The age when they started learning proved to be the most significant factor based on the logistic regression model.
 
+# Revisions After Professor Input - 12/11/24, 8:41p
+
+I need to revise the dataset so that we have a Correct and Incorrect column. The reason for this is that knowing what is incorrect allows us to see what is prescriptive. Once I do that, I will double-check all columns to make sure that the Correct indications do not include anything that has "ir" in the word, such as "Irlandes" which means "Irish" and not "to go". 
+
+Once I have two columns, one for Correct and one for Incorrect, then I will filter out anyone who started learning Spanish at birth. This is because they would be considered L1/Native speakers of Spanish if they started at birth, not L2/Second language learners. I am choosing to filter it out for anyone who started learning at age 5 or later, because Musliadi (2019) states that by five years old, a child understands the semantics of language (p. 167). Anyone trying to produce language or make conscious grammatical decisions, such as using the periphrastic future, should be able to process and produce it correctly by the age of five. Their L1 should be largely acquired by then, so the introduction of another language would not be native/bilingual, but an L2. 
+
+```{r}
+(A1)
+```
+
+
+```{r incorrect}
+A1 <- A1 %>%
+  mutate(Incorrect = if_else(Correct == 0, 1, 0))
+
+print(A1)
+
+A1 <- A1 %>% 
+  filter(AgeStart >= 5)
+
+print(A1)
+
+table(A1$Correct)
+table(A1$Incorrect)
+  
+
+library(lme4)
+
+# Ensure categorical variables are properly converted to factors
+A1 <- A1 %>%
+  mutate(
+    L1 = factor(L1),
+    Gender = factor(Gender),
+    Country = factor(Country),
+    Studies = factor(Studies),
+    Student = factor(Student)
+  )
+
+model2 <- glm(Correct ~ Age + AgeStart + Gender + Country + Months + Studies + Contacts + L1, data = A1, family = binomial)
+
+summary(model2)
+```
+
+```{r sk filter}
+A1KOR <- A1 %>% 
+  filter(Country == "Corea del Sur")
+
+print(A1KOR)
+```
+
+```{r model 2 gender}
+ggplot(model2, aes(Gender)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Gender vs. Correctness", x = "Gender", y = "Correctness") + 
+  theme_minimal()
+```
+
+The above bar graph shows that participants who identified as women had higher rates of correct productions of the periphrastic future compared to their male counterparts. According to the binomial logistic regression, women specifically had a positive estimate that significantly affected periphrastic future production. Although a small estimate, because it is positive, it demonstrates that being a woman results in more correct productions of periphrastic future in L2 Spanish.
+
+```{r model2 country}
+ggplot(model2, aes(Country)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Country of Origin vs. Correctness", x = "Country", y = "Correctness") + 
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 90)) 
+```
+
+```{r model2 months}
+ggplot(model2, aes(Months)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Months Spent Studying vs. Correctness", x = "Months", y = "Correctness") + 
+  theme_minimal()
+```
+
+```{r model2 studies}
+ggplot(model2, aes(Studies)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of School Where Spanish Was Studied vs. Correctness", x = "Studies", y = "Correctness") + 
+  theme_minimal()
+```
+
+```{r model2 contacts}
+ggplot(model2, aes(Contacts)) +
+  geom_bar(color = "red", fill = "black", size = .5) +
+  labs(title = "Bar Plot of Contacts Who Speak Spanish vs. Correctness", x = "Contacts", y = "Correctness") + 
+  theme_minimal()
+```
+
+
 ```{r session info}
 library(sessioninfo)
 session_info()
